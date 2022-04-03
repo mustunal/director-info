@@ -12,7 +12,7 @@ objects:
   - kind: BuildConfig
     apiVersion: v1
     metadata:
-      name: ${APP_NAME}
+      name: ${APP_NAME}-${APP_VERSION}
       namespace: ${PROJECT_NAME}
       labels:
         app: ${APP_NAME}
@@ -101,7 +101,7 @@ objects:
               terminationMessagePolicy: File
               imagePullPolicy: Always
               ports:
-                - containerPort: 8091
+                - containerPort: ${{SERVICE_PORT}}
                   protocol: TCP
               env:
                 - name: SERVICE_PORT
@@ -124,11 +124,10 @@ objects:
       ports:
         - name: ${SERVICE_PORT}-tcp
           protocol: TCP
-          port: 8091
-          targetPort: 8091
+          port: ${{SERVICE_PORT}}
+          targetPort: ${{SERVICE_PORT}}
       selector:
         app: ${APP_NAME}
-        deploymentconfig: ${APP_NAME}-${APP_VERSION}
         version: ${APP_VERSION}
       type: ClusterIP
       sessionAffinity: None
