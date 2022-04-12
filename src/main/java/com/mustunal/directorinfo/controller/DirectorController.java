@@ -23,7 +23,7 @@ public class DirectorController {
 
     @GetMapping("/sayHello")
     public String sayHello(){
-        return "Hello World - v1";
+        return "Hello World - v2";
     }
 
     @GetMapping
